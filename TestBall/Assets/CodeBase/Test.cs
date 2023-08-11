@@ -1,5 +1,6 @@
 ﻿using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.States;
+using CodeBase.Services.PlayerProgressService;
 using UnityEngine;
 using Zenject;
 
@@ -9,12 +10,13 @@ namespace CodeBase
     {
         private IGameFactory gameFactory;
         public GameObject cube;
+        private IPlayerProgressService _progress;
 
         [Inject]
-        void Construct(IGameFactory gamefactory)
+        void Construct(IPlayerProgressService progress)
         {
-            this.gameFactory = gamefactory;
-            var cube1 = gamefactory.CreateCube();
+            _progress = progress;
+
         }
     }
 }

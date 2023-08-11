@@ -1,10 +1,8 @@
 using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.States;
-using CodeBase.Services.AdsService;
 using CodeBase.Services.InputService;
 using CodeBase.Services.PlayerProgressService;
-using CodeBase.Services.RandomizerService;
 using CodeBase.Services.SaveLoadService;
 using CodeBase.Services.StaticDataService;
 using CodeBase.UI.Factories;
@@ -17,7 +15,6 @@ namespace CodeBase.CompositionRoot
     {
         public override void InstallBindings()
         {
-
             BindGameBootstraperFactory();
 
             BindCoroutineRunner();
@@ -34,13 +31,9 @@ namespace CodeBase.CompositionRoot
 
             BindUIFactory();
 
-            BindRandomizeService();
-
             BindPlayerProgressService();
 
             BindSaveLoadService();
-
-            BindAdsService();
 
             BindInputService();
         }
@@ -56,10 +49,8 @@ namespace CodeBase.CompositionRoot
         }
 
         private void BindInputService() =>
-            Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
-
-        private void BindAdsService() =>
-            Container.BindInterfacesAndSelfTo<AdsService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InputService>()
+                .AsSingle();
 
         private void BindSaveLoadService()
         {
@@ -75,24 +66,16 @@ namespace CodeBase.CompositionRoot
                 .AsSingle();
         }
 
-        private void BindRandomizeService() =>
-            Container.BindInterfacesAndSelfTo<RandomizerService>().AsSingle();
-
         private void BindGameFactory()
         {
-            Container
-                .Bind<IGameFactory>()
-                .FromSubContainerResolve()
-                .ByInstaller<GameFactoryInstaller>()
+            Container.BindInterfacesAndSelfTo<GameFactory>()
                 .AsSingle();
         }
 
         private void BindUIFactory()
         {
             Container
-                .Bind<IUIFactory>()
-                .FromSubContainerResolve()
-                .ByInstaller<UIFactoryInstaller>()
+                .BindInterfacesAndSelfTo<UIFactory>()
                 .AsSingle();
         }
 

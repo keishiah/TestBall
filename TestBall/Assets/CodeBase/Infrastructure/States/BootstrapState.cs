@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using CodeBase.Services.AdsService;
-using CodeBase.Services.StaticDataService;
-using UnityEngine;
+﻿using CodeBase.Services.StaticDataService;
 using Zenject;
 
 namespace CodeBase.Infrastructure.States
@@ -9,14 +6,11 @@ namespace CodeBase.Infrastructure.States
     public class BootstrapState : IState
     {
         private readonly IGameStateMachine gameStateMachine;
-        private readonly IAdsService adsService;
         private readonly IStaticDataService staticDataService;
 
         public BootstrapState(IGameStateMachine gameStateMachine,
-            IAdsService adsService,
             IStaticDataService staticDataService)
         {
-            this.adsService = adsService;
             this.staticDataService = staticDataService;
             this.gameStateMachine = gameStateMachine;
         }
@@ -30,7 +24,6 @@ namespace CodeBase.Infrastructure.States
         private async void InitServices()
         {
             staticDataService.Initialize();
-            adsService.Initialize();
         }
 
         public void Exit()
