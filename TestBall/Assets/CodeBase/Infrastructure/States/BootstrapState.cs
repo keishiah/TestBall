@@ -5,6 +5,7 @@ namespace CodeBase.Infrastructure.States
 {
     public class BootstrapState : IState
     {
+        //Инициализируем сервисы
         private readonly IGameStateMachine gameStateMachine;
         private readonly IStaticDataService staticDataService;
 

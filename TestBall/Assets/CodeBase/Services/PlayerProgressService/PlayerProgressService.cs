@@ -1,8 +1,9 @@
-﻿namespace CodeBase.Services.PlayerProgressService
+﻿using CodeBase.Data;
+
+namespace CodeBase.Services.PlayerProgressService
 {
     public class PlayerProgressService : IPlayerProgressService
     {
-        public Data.PlayerProgress Progress { get; set; }
-        public string z = "zzz";
+        public PlayerProgress Progress { get; set; }
     }
 }

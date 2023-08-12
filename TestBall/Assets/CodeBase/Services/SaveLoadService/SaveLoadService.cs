@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Data;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Services.PlayerProgressService;
 using UnityEngine;
 
@@ -9,21 +10,21 @@ namespace CodeBase.Services.SaveLoadService
     {
         private const string ProgressKey = "Progress";
         
-        private readonly IEnumerable<IProgressSaver> saverServices;
-        private readonly IPlayerProgressService playerProgressService;
+        private readonly IPlayerProgressService _playerProgressService;
+        private readonly IGameFactory _gameFactory;
 
-        public SaveLoadService(IEnumerable<IProgressSaver> saverServices, IPlayerProgressService playerProgressService)
+        public SaveLoadService(IPlayerProgressService playerProgressService,IGameFactory gameFactory)
         {
-            this.saverServices = saverServices;
-            this.playerProgressService = playerProgressService;
+            this._playerProgressService = playerProgressService;
+            _gameFactory = gameFactory;
         }
 
         public void SaveProgress()
         {
-            foreach (var saver in saverServices) 
-                saver.UpdateProgress(playerProgressService.Progress);
+            foreach (var saver in _gameFactory.ProgressSavers) 
+                saver.UpdateProgress(_playerProgressService.Progress);
             
-            PlayerPrefs.SetString(ProgressKey, playerProgressService.Progress.ToJson());
+            PlayerPrefs.SetString(ProgressKey, _playerProgressService.Progress.ToJson());
         }
 
         public PlayerProgress LoadProgress()

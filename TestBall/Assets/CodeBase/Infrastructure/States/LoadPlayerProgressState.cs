@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using CodeBase.Data;
+﻿using CodeBase.Data;
+using CodeBase.Infrastructure.AssetManagment;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.SaveLoadService;
 using UnityEngine;
@@ -11,32 +11,33 @@ namespace CodeBase.Infrastructure.States
     public class LoadPlayerProgressState : IState
     {
         private readonly IGameStateMachine gameStateMachine;
+
         private readonly ISaveLoadService saveLoadService;
-        private readonly IEnumerable<IProgressReader> progressReaderServices;
+        
         private readonly IPlayerProgressService progressService;
+        private readonly IGameFactory _gameFactory;
 
         public LoadPlayerProgressState(IGameStateMachine gameStateMachine, IPlayerProgressService progressService,
-            ISaveLoadService saveLoadService, IEnumerable<IProgressReader> progressReaderServices)
+            ISaveLoadService saveLoadService, IGameFactory gameFactory)
         {
             this.gameStateMachine = gameStateMachine;
             this.saveLoadService = saveLoadService;
             this.progressService = progressService;
-            this.progressReaderServices = progressReaderServices;
+            _gameFactory = gameFactory;
         }
 
         public void Enter()
         {
-
             var progress = LoadProgressOrInitNew();
 
             NotifyProgressReaderServices(progress);
 
-            gameStateMachine.Enter<LoadLevelState, string>(InfrastructureAssetPath.StartGameScene);
+            gameStateMachine.Enter<LoadLevelState, string>(AssetPath.StartGameScene);
         }
 
         private void NotifyProgressReaderServices(PlayerProgress progress)
         {
-            foreach (var reader in progressReaderServices)
+            foreach (var reader in _gameFactory.ProgressReaders)
                 reader.LoadProgress(progress);
         }
 
