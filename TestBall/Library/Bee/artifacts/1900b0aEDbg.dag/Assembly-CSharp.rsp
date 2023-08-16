@@ -324,6 +324,8 @@
 -r:"C:/Program Files/Unity 2021.3.19f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Gradle.dll"
 -r:"C:/Program Files/Unity 2021.3.19f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
 -r:"C:/Users/keshiah/Desktop/Test Balls/TestBall/Library/PackageCache/com.unity.testtools.codecoverage@1.2.2/lib/ReportGenerator/ReportGeneratorMerged.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/SimpleInput.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/SimpleInput.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.EditorCoroutines.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.Performance.Profile-Analyzer.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.Rider.Editor.ref.dll"
@@ -368,8 +370,14 @@
 "Assets/CodeBase/Infrastructure/States/IStateMachine.cs"
 "Assets/CodeBase/Infrastructure/States/LoadLevelState.cs"
 "Assets/CodeBase/Infrastructure/States/LoadPlayerProgressState.cs"
+"Assets/CodeBase/Logic/Ball/BallMoving.cs"
+"Assets/CodeBase/Logic/Ball/BallOut.cs"
+"Assets/CodeBase/Logic/Ball/GetRacketTouch.cs"
+"Assets/CodeBase/Logic/RacketMover.cs"
+"Assets/CodeBase/Services/HitCounter.cs"
 "Assets/CodeBase/Services/InputService/IInputService.cs"
 "Assets/CodeBase/Services/InputService/InputService.cs"
+"Assets/CodeBase/Services/InputService/UnityInputService.cs"
 "Assets/CodeBase/Services/PlayerProgressService/IPlayerProgressService.cs"
 "Assets/CodeBase/Services/PlayerProgressService/IProgressReader.cs"
 "Assets/CodeBase/Services/PlayerProgressService/IProgressSaver.cs"
@@ -384,8 +392,7 @@
 "Assets/CodeBase/UI/Extensions/ButtonExtensions.cs"
 "Assets/CodeBase/UI/Factories/IUIFactory.cs"
 "Assets/CodeBase/UI/Factories/UIFactory.cs"
-"Assets/CodeBase/UI/HUD/HUDRoot.cs"
-"Assets/CodeBase/UI/HUD/IHUDRoot.cs"
+"Assets/CodeBase/UI/UiElements/HitCounterLabel.cs"
 -langversion:9.0
 
 /deterministic

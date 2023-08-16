@@ -2,6 +2,7 @@ using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.States;
+using CodeBase.Services;
 using CodeBase.Services.InputService;
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.SaveLoadService;
@@ -36,7 +37,14 @@ namespace CodeBase.CompositionRoot
             BindSaveLoadService();
 
             BindInputService();
-            
+
+            BindHitCounter();
+
+        }
+
+        private void BindHitCounter()
+        {
+            Container.Bind<IHitCounter>().To<HitCounter>().AsSingle();
         }
 
         private void BindStaticDataService()

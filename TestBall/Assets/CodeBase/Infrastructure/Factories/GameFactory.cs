@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.UI.HUD;
 using UnityEngine;
@@ -18,10 +19,20 @@ namespace CodeBase.Infrastructure.Factories
             _diContainer = diContainer;
         }
 
-        public void CreateTestMono()
+        public GameObject CreateRacket(Vector3 at)
         {
-            GameObject testMono = InstantiateRegistered("TestMono");
+            var racket = _diContainer.InstantiatePrefab(Resources.Load(AssetPath.Racket));
+            racket.transform.position = at;
+            return racket;
         }
+
+        public GameObject CreateBall(Vector3 at)
+        {
+            var ball = _diContainer.InstantiatePrefab(Resources.Load(AssetPath.Ball));
+            ball.transform.position = at;
+            return ball;
+        }
+
 
         private void RegisterProgressWatchers(GameObject gameObject)
         {

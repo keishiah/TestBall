@@ -63,6 +63,7 @@
      <Compile Include="Assets\CodeBase\Infrastructure\Observables\Publisher.cs" />
      <Compile Include="Assets\CodeBase\Services\PlayerProgressService\IProgressReader.cs" />
      <Compile Include="Assets\CodeBase\Services\SaveLoadService\SaveLoadService.cs" />
+     <Compile Include="Assets\CodeBase\Logic\RacketMover.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\SceneLoader.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\States\BootstrapState.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Factories\GameFactoryInstaller.cs" />
@@ -71,33 +72,42 @@
      <Compile Include="Assets\CodeBase\Infrastructure\LoadingCurtain.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\CoroutineRunner.cs" />
      <Compile Include="Assets\CodeBase\Services\SaveLoadService\ISaveLoadService.cs" />
+     <Compile Include="Assets\CodeBase\Logic\Ball\GetRacketTouch.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\ICoroutineRunner.cs" />
-     <Compile Include="Assets\CodeBase\UI\HUD\IHUDRoot.cs" />
      <Compile Include="Assets\CodeBase\Data\PlayerProgress.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Factories\ICube.cs" />
+     <Compile Include="Assets\CodeBase\Logic\Ball\BallOut.cs" />
+     <Compile Include="Assets\CodeBase\Logic\Ball\BallMoving.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Observables\IPublisher.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\States\IGameStateMachine.cs" />
      <Compile Include="Assets\CodeBase\Services\PlayerProgressService\IProgressSaver.cs" />
      <Compile Include="Assets\CodeBase\Test.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Factories\GameFactory.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Factories\IGameFactory.cs" />
-     <Compile Include="Assets\CodeBase\UI\HUD\HUDRoot.cs" />
      <Compile Include="Assets\CodeBase\UI\Factories\IUIFactory.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\AssetManagment\AssetPath.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\States\IExitableState.cs" />
+     <Compile Include="Assets\CodeBase\Services\InputService\UnityInputService.cs" />
      <Compile Include="Assets\CodeBase\CompositionRoot\GameInstaller.cs" />
      <Compile Include="Assets\CodeBase\UI\Extensions\ButtonAwaiter.cs" />
+     <Compile Include="Assets\CodeBase\Services\HitCounter.cs" />
+     <Compile Include="Assets\CodeBase\UI\UiElements\HitCounterLabel.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\CodeBase\Services\SaveLoadService" />
+     <Folder Include="Assets\Resources\GameObjects\Ball" />
      <Folder Include="Assets\CodeBase\Infrastructure\AssetManagment" />
      <Folder Include="Assets\CodeBase\Infrastructure\Factories" />
+     <Folder Include="Assets\Resources\GameObjects" />
      <Folder Include="Assets\CodeBase\CompositionRoot" />
      <Folder Include="Assets\CodeBase\Services\StaticDataService" />
      <Folder Include="Assets\CodeBase\Infrastructure\Observables" />
      <Folder Include="Assets\CodeBase" />
      <Folder Include="Assets\CodeBase\Infrastructure\States" />
+     <Folder Include="Assets\CodeBase\UI\UiElements" />
+     <Folder Include="Assets\CodeBase\Logic" />
+     <Folder Include="Assets\Resources\Ui" />
+     <Folder Include="Assets\Resources\Scenes\GamePlay" />
      <Folder Include="Assets\CodeBase\Data" />
-     <Folder Include="Assets\CodeBase\UI\HUD" />
      <Folder Include="Assets\Resources" />
      <Folder Include="Assets\CodeBase\Services" />
      <Folder Include="Assets\Resources\Infrastructure" />
@@ -108,6 +118,8 @@
      <Folder Include="Assets\CodeBase\Services\PlayerProgressService" />
      <Folder Include="Assets\Resources\Scenes" />
      <Folder Include="Assets\CodeBase\UI\Factories" />
+     <Folder Include="Assets\CodeBase\Logic\Ball" />
+     <Folder Include="Assets\Resources\GameObjects\racket" />
      <Reference Include="UnityEngine">
      <HintPath>C:\Program Files\Unity 2021.3.19f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>
@@ -780,9 +792,17 @@
       <Project>{63931c8b-0e02-8963-18e2-b9de6db40586}</Project>
       <Name>Zenject</Name>
     </ProjectReference>
+    <ProjectReference Include="SimpleInput.Runtime.csproj">
+      <Project>{0aae5803-1112-f0e1-6c5a-4ab37e918522}</Project>
+      <Name>SimpleInput.Runtime</Name>
+    </ProjectReference>
     <ProjectReference Include="Zenject-Editor.csproj">
       <Project>{f8662553-0597-ed9b-d6b3-622ba20f695f}</Project>
       <Name>Zenject-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SimpleInput.Editor.csproj">
+      <Project>{d8b861de-a21c-bcd1-e90b-ae4434fe3f03}</Project>
+      <Name>SimpleInput.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

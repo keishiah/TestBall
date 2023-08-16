@@ -1,4 +1,5 @@
-﻿using CodeBase.Services.StaticDataService;
+﻿using CodeBase.Services.InputService;
+using CodeBase.Services.StaticDataService;
 using Zenject;
 
 namespace CodeBase.Infrastructure.States
@@ -8,12 +9,14 @@ namespace CodeBase.Infrastructure.States
         //Инициализируем сервисы
         private readonly IGameStateMachine gameStateMachine;
         private readonly IStaticDataService staticDataService;
+        private readonly IInputService _inputService;
 
         public BootstrapState(IGameStateMachine gameStateMachine,
-            IStaticDataService staticDataService)
+            IStaticDataService staticDataService, IInputService inputService)
         {
             this.staticDataService = staticDataService;
             this.gameStateMachine = gameStateMachine;
+            _inputService = inputService;
         }
 
         public void Enter()

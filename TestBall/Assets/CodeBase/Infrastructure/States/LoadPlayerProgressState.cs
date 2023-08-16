@@ -13,7 +13,7 @@ namespace CodeBase.Infrastructure.States
         private readonly IGameStateMachine gameStateMachine;
 
         private readonly ISaveLoadService saveLoadService;
-        
+
         private readonly IPlayerProgressService progressService;
         private readonly IGameFactory _gameFactory;
 

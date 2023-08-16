@@ -6,7 +6,6 @@ namespace CodeBase.Services.StaticDataService
     {
         public void Initialize()
         {
-
         }
     }
 }
