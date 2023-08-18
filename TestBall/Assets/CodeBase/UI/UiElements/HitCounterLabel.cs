@@ -1,4 +1,5 @@
-﻿using CodeBase.Services;
+﻿using System;
+using CodeBase.Services;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -25,6 +26,11 @@ namespace CodeBase.UI.UiElements
         private void SetHitCounts(int value)
         {
             hitText.text = value.ToString();
+        }
+
+        private void OnDestroy()
+        {
+            _hitCounter.OnHitCountChanged -= SetHitCounts;
         }
     }
 }

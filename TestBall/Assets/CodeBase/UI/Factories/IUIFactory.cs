@@ -6,5 +6,7 @@ namespace CodeBase.UI.Factories
     {
         void Cleanup();
         GameObject CreateUiRoot();
+        void CreateGameobjectsRoot();
+        void CreateMainMenuUi();
     }
 }

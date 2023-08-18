@@ -15,42 +15,32 @@ namespace CodeBase.Infrastructure.States
         private readonly ISaveLoadService saveLoadService;
 
         private readonly IPlayerProgressService progressService;
-        private readonly IGameFactory _gameFactory;
 
         public LoadPlayerProgressState(IGameStateMachine gameStateMachine, IPlayerProgressService progressService,
-            ISaveLoadService saveLoadService, IGameFactory gameFactory)
+            ISaveLoadService saveLoadService)
         {
             this.gameStateMachine = gameStateMachine;
             this.saveLoadService = saveLoadService;
             this.progressService = progressService;
-            _gameFactory = gameFactory;
         }
 
         public void Enter()
         {
-            var progress = LoadProgressOrInitNew();
-
-            NotifyProgressReaderServices(progress);
-
+            LoadProgressOrInitNew();
             gameStateMachine.Enter<LoadLevelState, string>(AssetPath.StartGameScene);
-        }
-
-        private void NotifyProgressReaderServices(PlayerProgress progress)
-        {
-            foreach (var reader in _gameFactory.ProgressReaders)
-                reader.LoadProgress(progress);
         }
 
         public void Exit()
         {
         }
 
-        private PlayerProgress LoadProgressOrInitNew()
+        private void LoadProgressOrInitNew()
         {
             progressService.Progress =
                 saveLoadService.LoadProgress()
                 ?? NewProgress();
-            return progressService.Progress;
+            
+
         }
 
         private PlayerProgress NewProgress()

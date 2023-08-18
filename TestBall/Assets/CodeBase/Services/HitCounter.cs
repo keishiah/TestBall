@@ -2,31 +2,22 @@
 using CodeBase.Data;
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.SaveLoadService;
-using UnityEngine;
 
 namespace CodeBase.Services
 {
-    public interface IHitCounter
+    public class HitCounter : IHitCounter
     {
-        void GetHit();
-        void SaveMaxHitCount();
-        void ResetHits();
-        int _maxHits { get; set; }
-        event Action<int> OnHitCountChanged;
-    }
+        private IPlayerProgressService _progressService;
 
-    public class HitCounter : IHitCounter, IProgressSaver
-    {
+
+        private ISaveLoadService _saveLoadService;
+
         private int _currentHits = 0;
 
         public int _maxHits
         {
             get => _progressService.Progress.HitCounts.hitCounts;
-            set => _progressService.Progress.HitCounts.hitCounts = value;
         }
-
-        private IPlayerProgressService _progressService;
-        private ISaveLoadService _saveLoadService;
 
         public event Action<int> OnHitCountChanged;
 
@@ -36,7 +27,6 @@ namespace CodeBase.Services
             _progressService = playerProgressService;
             _saveLoadService = saveLoadService;
 
-            LoadProgress(_progressService.Progress);
         }
 
 
@@ -56,18 +46,10 @@ namespace CodeBase.Services
         {
             if (_currentHits > _maxHits)
             {
-                UpdateProgress(_progressService.Progress);
+                 _progressService.Progress.HitCounts.hitCounts = _currentHits;
                 _saveLoadService.SaveProgress();
             }
         }
 
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            progress.HitCounts.hitCounts = _currentHits;
-        }
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-        }
     }
 }

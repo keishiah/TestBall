@@ -30,7 +30,6 @@ namespace CodeBase.Logic
                 if (CheckCollisionRocketId(collision)) return;
 
                 _hitCounter.GetHit();
-                Debug.Log("hit");
             }
         }
 

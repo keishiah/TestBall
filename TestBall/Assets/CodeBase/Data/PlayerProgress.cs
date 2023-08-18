@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace CodeBase.Data
 {
@@ -6,10 +7,12 @@ namespace CodeBase.Data
     public class PlayerProgress
     {
         public HitCounts HitCounts;
+        public CustomStats CustomStats;
 
         public PlayerProgress()
         {
             HitCounts = new HitCounts();
+            CustomStats = new CustomStats();
         }
     }
 
@@ -21,6 +24,17 @@ namespace CodeBase.Data
         public void SetHit(int maxHits)
         {
             hitCounts = maxHits;
+        }
+    }
+
+    [Serializable]
+    public class CustomStats
+    {
+        public Color Color;
+
+        public CustomStats()
+        {
+            Color = new Color(0, 0, 0);
         }
     }
 }

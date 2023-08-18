@@ -1,4 +1,6 @@
-﻿using CodeBase.Data;
+﻿using System;
+using CodeBase.Data;
+using UnityEngine;
 
 namespace CodeBase.Services.PlayerProgressService
 {
@@ -6,4 +8,6 @@ namespace CodeBase.Services.PlayerProgressService
     {
         public PlayerProgress Progress { get; set; }
     }
+
+
 }

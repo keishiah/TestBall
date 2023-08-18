@@ -8,12 +8,14 @@ using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.SaveLoadService;
 using CodeBase.Services.StaticDataService;
 using CodeBase.UI.Factories;
+using UnityEngine;
 using Zenject;
 
 namespace CodeBase.CompositionRoot
 {
     public class GameInstaller : MonoInstaller
     {
+
         public override void InstallBindings()
         {
             BindGameBootstraperFactory();
@@ -21,9 +23,7 @@ namespace CodeBase.CompositionRoot
             BindCoroutineRunner();
 
             BindSceneLoader();
-
-            BindLoadingCurtain();
-
+            
             BindGameStateMachine();
 
             BindStaticDataService();
@@ -40,6 +40,12 @@ namespace CodeBase.CompositionRoot
 
             BindHitCounter();
 
+            BindCustomizer();
+        }
+
+        private void BindCustomizer()
+        {
+            Container.Bind<ICustomizerService>().To<CustomizerService>().AsSingle();
         }
 
         private void BindHitCounter()
@@ -85,8 +91,7 @@ namespace CodeBase.CompositionRoot
 
         private void BindGameFactory()
         {
-            Container.Bind<IGameFactory>().To<GameFactory>()
-                .AsSingle();
+            Container.BindInterfacesAndSelfTo<GameFactory>().AsSingle();
         }
 
         private void BindUIFactory()
@@ -109,12 +114,7 @@ namespace CodeBase.CompositionRoot
             Container.Bind<ISceneLoader>()
                 .To<SceneLoader>()
                 .AsSingle();
-
-        private void BindLoadingCurtain()
-        {
-            Container.Bind<ILoadingCurtain>().To<LoadingCurtain>()
-                .FromComponentInNewPrefabResource(AssetPath.CurtainPath).AsSingle();
-        }
+        
 
         private void BindGameStateMachine()
         {
@@ -124,5 +124,6 @@ namespace CodeBase.CompositionRoot
 
             Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
         }
+
     }
 }

@@ -14,7 +14,7 @@ namespace CodeBase.Infrastructure.States
             LoadLevelState.Factory loadLevelStateFactory)
         {
             registeredStates = new Dictionary<Type, IExitableState>();
-            
+
             RegisterState(bootstrapStateFactory.Create(this));
             RegisterState(loadGameSaveStateFactory.Create(this));
             RegisterState(loadLevelStateFactory.Create(this));
@@ -38,14 +38,14 @@ namespace CodeBase.Infrastructure.States
         private TState ChangeState<TState>() where TState : class, IExitableState
         {
             currentState?.Exit();
-      
+
             TState state = GetState<TState>();
             currentState = state;
-      
+
             return state;
         }
-    
-        private TState GetState<TState>() where TState : class, IExitableState => 
+
+        private TState GetState<TState>() where TState : class, IExitableState =>
             registeredStates[typeof(TState)] as TState;
     }
 }

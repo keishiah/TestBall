@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using CodeBase.Infrastructure.Factories;
+using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace CodeBase.Logic
@@ -20,5 +22,6 @@ namespace CodeBase.Logic
 
             gameObject.GetComponent<Rigidbody>().AddForce(randomVector * 10f, ForceMode.VelocityChange);
         }
+
     }
 }
