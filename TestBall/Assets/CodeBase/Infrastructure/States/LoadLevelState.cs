@@ -34,27 +34,15 @@ namespace CodeBase.Infrastructure.States
 
         private void OnLoaded()
         {
-            if (_sceneName == "GamePlay")
-                InitGame();
-            if (_sceneName == "MainMenu")
-                InitMainMenu();
+            InitGame();
         }
 
-        private void InitMainMenu()
-        {
-            _uiFactory.CreateGameobjectsRoot();
-            _uiFactory.CreateMainMenuUi();
-        }
 
         private void InitGame()
         {
             _gameFactory.CreateGameobjectsRoot();
             _gameFactory.LoadResources();
             _gameFactory.CreateBall(new Vector3(0, 0, 0));
-            _gameFactory.CreateRacket(new Vector3(0, 0, -9));
-            _gameFactory.CreateEnemyRacket(new Vector3(0, 0, 9));
-            _uiFactory.CreateGameobjectsRoot();
-            _uiFactory.CreateUiRoot();
         }
 
         public class Factory : PlaceholderFactory<IGameStateMachine, LoadLevelState>

@@ -14,11 +14,6 @@ namespace CodeBase.UI.Factories
             _diContainer = diContainer;
         }
 
-        public GameObject CreateUiRoot()
-        {
-            var label = _diContainer.InstantiatePrefab(Resources.Load(AssetPath.UiRoot), _gameObjectsRoot.transform);
-            return label;
-        }
 
         public void CreateGameobjectsRoot()
         {
@@ -27,7 +22,6 @@ namespace CodeBase.UI.Factories
 
         public void CreateMainMenuUi()
         {
-            _diContainer.InstantiatePrefab(Resources.Load(AssetPath.MaiMenuUiRoot), _gameObjectsRoot.transform);
         }
 
         public void Cleanup()

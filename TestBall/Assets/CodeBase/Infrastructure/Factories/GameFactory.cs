@@ -27,23 +27,8 @@ namespace CodeBase.Infrastructure.Factories
         public void LoadResources()
         {
             _ballPrefab = Resources.Load(AssetPath.Ball) as GameObject;
-            _racketPrefab = Resources.Load(AssetPath.Racket) as GameObject;
-            _enemyRacketPrefab = Resources.Load(AssetPath.EnemyRacket) as GameObject;
         }
 
-        public GameObject CreateRacket(Vector3 at)
-        {
-            var racket = _instantiator.InstantiatePrefab(_racketPrefab, _gameObjectsRoot.transform);
-            racket.transform.position = at;
-            return racket;
-        }
-
-        public GameObject CreateEnemyRacket(Vector3 at)
-        {
-            var racket = _instantiator.InstantiatePrefab(_enemyRacketPrefab, _gameObjectsRoot.transform);
-            racket.transform.position = at;
-            return racket;
-        }
 
         public GameObject CreateBall(Vector3 at)
         {
