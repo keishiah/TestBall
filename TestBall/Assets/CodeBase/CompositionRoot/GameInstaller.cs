@@ -1,10 +1,10 @@
 using CodeBase.Infrastructure;
+using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.States;
-using CodeBase.Services.AdsService;
+using CodeBase.Services;
 using CodeBase.Services.InputService;
 using CodeBase.Services.PlayerProgressService;
-using CodeBase.Services.RandomizerService;
 using CodeBase.Services.SaveLoadService;
 using CodeBase.Services.StaticDataService;
 using CodeBase.UI.Factories;
@@ -15,17 +15,15 @@ namespace CodeBase.CompositionRoot
 {
     public class GameInstaller : MonoInstaller
     {
+
         public override void InstallBindings()
         {
-
             BindGameBootstraperFactory();
 
             BindCoroutineRunner();
 
             BindSceneLoader();
-
-            BindLoadingCurtain();
-
+            
             BindGameStateMachine();
 
             BindStaticDataService();
@@ -34,65 +32,72 @@ namespace CodeBase.CompositionRoot
 
             BindUIFactory();
 
-            BindRandomizeService();
-
             BindPlayerProgressService();
 
             BindSaveLoadService();
 
-            BindAdsService();
-
             BindInputService();
+
+            BindHitCounter();
+
+            BindCustomizer();
         }
 
-        private void BindStaticDataService() =>
-            Container.BindInterfacesAndSelfTo<StaticDataService>().AsSingle();
+        private void BindCustomizer()
+        {
+            Container.Bind<ICustomizerService>().To<CustomizerService>().AsSingle();
+        }
+
+        private void BindHitCounter()
+        {
+            Container.Bind<IHitCounter>().To<HitCounter>().AsSingle();
+        }
+
+        private void BindStaticDataService()
+        {
+            Container.Bind<IStaticDataService>()
+                .To<StaticDataService>()
+                .AsSingle();
+        }
 
         private void BindGameBootstraperFactory()
         {
             Container
                 .BindFactory<GameBootstrapper, GameBootstrapper.Factory>()
-                .FromComponentInNewPrefabResource(InfrastructureAssetPath.GameBootstraper);
+                .FromNewComponentOnNewGameObject();
         }
 
-        private void BindInputService() =>
-            Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
-
-        private void BindAdsService() =>
-            Container.BindInterfacesAndSelfTo<AdsService>().AsSingle();
+        private void BindInputService()
+        {
+            Container.Bind<IInputService>()
+                .To<InputService>()
+                .AsSingle();
+        }
 
         private void BindSaveLoadService()
         {
             Container
-                .BindInterfacesAndSelfTo<SaveLoadService>()
+                .Bind<ISaveLoadService>()
+                .To<SaveLoadService>()
                 .AsSingle();
         }
 
         private void BindPlayerProgressService()
         {
-            Container
-                .BindInterfacesAndSelfTo<PlayerProgressService>()
+            Container.Bind<IPlayerProgressService>()
+                .To<PlayerProgressService>()
                 .AsSingle();
         }
 
-        private void BindRandomizeService() =>
-            Container.BindInterfacesAndSelfTo<RandomizerService>().AsSingle();
-
         private void BindGameFactory()
         {
-            Container
-                .Bind<IGameFactory>()
-                .FromSubContainerResolve()
-                .ByInstaller<GameFactoryInstaller>()
-                .AsSingle();
+            Container.BindInterfacesAndSelfTo<GameFactory>().AsSingle();
         }
 
         private void BindUIFactory()
         {
             Container
-                .Bind<IUIFactory>()
-                .FromSubContainerResolve()
-                .ByInstaller<UIFactoryInstaller>()
+                .BindInterfacesAndSelfTo<UIFactory>()
                 .AsSingle();
         }
 
@@ -101,24 +106,24 @@ namespace CodeBase.CompositionRoot
             Container
                 .Bind<ICoroutineRunner>()
                 .To<CoroutineRunner>()
-                .FromComponentInNewPrefabResource(InfrastructureAssetPath.CoroutineRunnerPath)
+                .FromNewComponentOnNewGameObject()
                 .AsSingle();
         }
 
         private void BindSceneLoader() =>
-            Container.BindInterfacesAndSelfTo<SceneLoader>().AsSingle();
-
-        private void BindLoadingCurtain() =>
-            Container.Bind<ILoadingCurtain>().To<LoadingCurtain>()
-                .FromComponentInNewPrefabResource(InfrastructureAssetPath.CurtainPath).AsSingle();
+            Container.Bind<ISceneLoader>()
+                .To<SceneLoader>()
+                .AsSingle();
+        
 
         private void BindGameStateMachine()
         {
-            Container
-                .Bind<IGameStateMachine>()
-                .FromSubContainerResolve()
-                .ByInstaller<GameStateMachineInstaller>()
-                .AsSingle();
+            Container.BindFactory<IGameStateMachine, BootstrapState, BootstrapState.Factory>();
+            Container.BindFactory<IGameStateMachine, LoadPlayerProgressState, LoadPlayerProgressState.Factory>();
+            Container.BindFactory<IGameStateMachine, LoadLevelState, LoadLevelState.Factory>();
+
+            Container.Bind<IGameStateMachine>().To<GameStateMachine>().AsSingle();
         }
+
     }
 }

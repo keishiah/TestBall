@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using CodeBase.Data;
+﻿using CodeBase.Data;
+using CodeBase.Infrastructure.AssetManagment;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Services.PlayerProgressService;
 using CodeBase.Services.SaveLoadService;
 using UnityEngine;
@@ -11,45 +11,36 @@ namespace CodeBase.Infrastructure.States
     public class LoadPlayerProgressState : IState
     {
         private readonly IGameStateMachine gameStateMachine;
+
         private readonly ISaveLoadService saveLoadService;
-        private readonly IEnumerable<IProgressReader> progressReaderServices;
+
         private readonly IPlayerProgressService progressService;
 
         public LoadPlayerProgressState(IGameStateMachine gameStateMachine, IPlayerProgressService progressService,
-            ISaveLoadService saveLoadService, IEnumerable<IProgressReader> progressReaderServices)
+            ISaveLoadService saveLoadService)
         {
             this.gameStateMachine = gameStateMachine;
             this.saveLoadService = saveLoadService;
             this.progressService = progressService;
-            this.progressReaderServices = progressReaderServices;
         }
 
         public void Enter()
         {
-
-            var progress = LoadProgressOrInitNew();
-
-            NotifyProgressReaderServices(progress);
-
-            gameStateMachine.Enter<LoadLevelState, string>(InfrastructureAssetPath.StartGameScene);
-        }
-
-        private void NotifyProgressReaderServices(PlayerProgress progress)
-        {
-            foreach (var reader in progressReaderServices)
-                reader.LoadProgress(progress);
+            LoadProgressOrInitNew();
+            gameStateMachine.Enter<LoadLevelState, string>(AssetPath.StartGameScene);
         }
 
         public void Exit()
         {
         }
 
-        private PlayerProgress LoadProgressOrInitNew()
+        private void LoadProgressOrInitNew()
         {
             progressService.Progress =
                 saveLoadService.LoadProgress()
                 ?? NewProgress();
-            return progressService.Progress;
+            
+
         }
 
         private PlayerProgress NewProgress()

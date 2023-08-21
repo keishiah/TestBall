@@ -1,24 +1,22 @@
-﻿using System.Threading.Tasks;
-using CodeBase.Services.AdsService;
+﻿using CodeBase.Services.InputService;
 using CodeBase.Services.StaticDataService;
-using UnityEngine;
 using Zenject;
 
 namespace CodeBase.Infrastructure.States
 {
     public class BootstrapState : IState
     {
+        //Инициализируем сервисы
         private readonly IGameStateMachine gameStateMachine;
-        private readonly IAdsService adsService;
         private readonly IStaticDataService staticDataService;
+        private readonly IInputService _inputService;
 
         public BootstrapState(IGameStateMachine gameStateMachine,
-            IAdsService adsService,
-            IStaticDataService staticDataService)
+            IStaticDataService staticDataService, IInputService inputService)
         {
-            this.adsService = adsService;
             this.staticDataService = staticDataService;
             this.gameStateMachine = gameStateMachine;
+            _inputService = inputService;
         }
 
         public void Enter()
@@ -30,7 +28,6 @@ namespace CodeBase.Infrastructure.States
         private async void InitServices()
         {
             staticDataService.Initialize();
-            adsService.Initialize();
         }
 
         public void Exit()

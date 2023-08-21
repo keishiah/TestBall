@@ -1,7 +1,13 @@
-﻿namespace CodeBase.Services.PlayerProgressService
+﻿using System;
+using CodeBase.Data;
+using UnityEngine;
+
+namespace CodeBase.Services.PlayerProgressService
 {
     public class PlayerProgressService : IPlayerProgressService
     {
-        public Data.PlayerProgress Progress { get; set; }
+        public PlayerProgress Progress { get; set; }
     }
+
+
 }
