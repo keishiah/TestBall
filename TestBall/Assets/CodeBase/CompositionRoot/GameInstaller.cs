@@ -38,21 +38,8 @@ namespace CodeBase.CompositionRoot
 
             BindInputService();
 
-            BindHitCounter();
-
-            BindCustomizer();
         }
-
-        private void BindCustomizer()
-        {
-            Container.Bind<ICustomizerService>().To<CustomizerService>().AsSingle();
-        }
-
-        private void BindHitCounter()
-        {
-            Container.Bind<IHitCounter>().To<HitCounter>().AsSingle();
-        }
-
+        
         private void BindStaticDataService()
         {
             Container.Bind<IStaticDataService>()

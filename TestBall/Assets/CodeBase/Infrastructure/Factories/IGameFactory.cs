@@ -10,9 +10,9 @@ namespace CodeBase.Infrastructure.Factories
 
         // List<IProgressReader>  ProgressReaders { get; }
         // List<IProgressSaver> ProgressSavers { get; }
-        GameObject CreateRacket(Vector3 at);
+
         GameObject CreateBall(Vector3 at);
         void CreateGameobjectsRoot();
-        GameObject CreateEnemyRacket(Vector3 at);
+
     }
 }
