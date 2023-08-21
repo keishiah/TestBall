@@ -13,5 +13,6 @@ namespace CodeBase.Infrastructure.Factories
         GameObject CreateRacket(Vector3 at);
         GameObject CreateBall(Vector3 at);
         void CreateGameobjectsRoot();
+        GameObject CreateEnemyRacket(Vector3 at);
     }
 }

@@ -50,9 +50,9 @@ namespace CodeBase.Infrastructure.States
         {
             _gameFactory.CreateGameobjectsRoot();
             _gameFactory.LoadResources();
-            _gameFactory.CreateRacket(new Vector3(0, 0, -9));
-            _gameFactory.CreateRacket(new Vector3(0, 0, 9));
             _gameFactory.CreateBall(new Vector3(0, 0, 0));
+            _gameFactory.CreateRacket(new Vector3(0, 0, -9));
+            _gameFactory.CreateEnemyRacket(new Vector3(0, 0, 9));
             _uiFactory.CreateGameobjectsRoot();
             _uiFactory.CreateUiRoot();
         }

@@ -34,6 +34,7 @@ namespace CodeBase.Services
         {
             _currentHits++;
             SaveMaxHitCount();
+            
             OnHitCountChanged?.Invoke(_maxHits);
         }
 

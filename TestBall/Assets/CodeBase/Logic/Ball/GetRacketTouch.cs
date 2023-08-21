@@ -27,10 +27,15 @@ namespace CodeBase.Logic
         {
             if (((1 << collision.gameObject.layer) & layerMask) != 0)
             {
-                if (CheckCollisionRocketId(collision)) return;
-
-                _hitCounter.GetHit();
+                AddHit(collision);
             }
+        }
+
+        private void AddHit(Collision collision)
+        {
+            if (CheckCollisionRocketId(collision)) return;
+
+            _hitCounter.GetHit();
         }
 
         private bool CheckCollisionRocketId(Collision collision)

@@ -42,9 +42,13 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\CodeBase\UI\Factories\UIFactory.cs" />
+     <Compile Include="Assets\CodeBase\Logic\Ball\GetBallContact.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\States\LoadLevelState.cs" />
+     <Compile Include="Assets\CodeBase\Logic\GetRacketSpeed.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\States\GameStateMachine.cs" />
+     <Compile Include="Assets\CodeBase\Services\CustomizerService.cs" />
      <Compile Include="Assets\CodeBase\UI\UiElements\HitCounterLabel.cs" />
+     <Compile Include="Assets\CodeBase\Services\IHitCounter.cs" />
      <Compile Include="Assets\CodeBase\TestMono.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\States\IPaylodedState.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\GameRunner.cs" />
@@ -77,15 +81,19 @@
      <Compile Include="Assets\CodeBase\UI\UiElements\RestartButton.cs" />
      <Compile Include="Assets\CodeBase\UI\UiElements\PauseButton.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\ICoroutineRunner.cs" />
+     <Compile Include="Assets\CodeBase\Customizers\ColorCustomizer\ChangeColorButton.cs" />
      <Compile Include="Assets\CodeBase\Data\PlayerProgress.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Factories\ICube.cs" />
      <Compile Include="Assets\CodeBase\Logic\Ball\BallOut.cs" />
      <Compile Include="Assets\CodeBase\Logic\Ball\BallMoving.cs" />
      <Compile Include="Assets\CodeBase\StaticData\CustomColorStaticData.cs" />
      <Compile Include="Assets\CodeBase\Customizers\ColorCustomizer\ColorCustomizer.cs" />
+     <Compile Include="Assets\CodeBase\Logic\Ball\BallAceleration.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Observables\IPublisher.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\States\IGameStateMachine.cs" />
+     <Compile Include="Assets\CodeBase\Logic\rocketai.cs" />
      <Compile Include="Assets\CodeBase\Test.cs" />
+     <Compile Include="Assets\CodeBase\Services\ICustomizerService.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Factories\GameFactory.cs" />
      <Compile Include="Assets\CodeBase\Infrastructure\Factories\IGameFactory.cs" />
      <Compile Include="Assets\CodeBase\UI\Factories\IUIFactory.cs" />
@@ -94,10 +102,6 @@
      <Compile Include="Assets\CodeBase\Services\InputService\UnityInputService.cs" />
      <Compile Include="Assets\CodeBase\Customizers\ColorCustomizer\OpenCloseCustomMenuButton.cs" />
      <Compile Include="Assets\CodeBase\CompositionRoot\GameInstaller.cs" />
-     <Compile Include="Assets\CodeBase\Customizers\ColorCustomizer\ChangeColorButton.cs" />
-     <Compile Include="Assets\CodeBase\Services\CustomizerService.cs" />
-     <Compile Include="Assets\CodeBase\Services\ICustomizerService.cs" />
-     <Compile Include="Assets\CodeBase\Services\IHitCounter.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\CodeBase\Services\SaveLoadService" />
      <Folder Include="Assets\Resources\GameObjects\Ball" />
@@ -113,6 +117,7 @@
      <Folder Include="Assets\CodeBase\Infrastructure\States" />
      <Folder Include="Assets\CodeBase\UI\UiElements" />
      <Folder Include="Assets\CodeBase\Logic" />
+     <None Include="Assets\Resources\GameObjects\Ball\NewSurfaceShader.shader" />
      <Folder Include="Assets\Resources\Ui" />
      <Folder Include="Assets\Resources\Scenes\GamePlay" />
      <Folder Include="Assets\Resources\StaticData" />
